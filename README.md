@@ -38,4 +38,3 @@ The first public release should use delayed or end-of-day data where licensing i
 
 - [Product specification](docs/specs/product-spec.md)
 - [Engineering and contribution guidance](AGENTS.md)
-
