@@ -10,7 +10,7 @@ Use versioned, typed contracts before implementation. Public APIs must never exp
 - `GET /api/v1/instruments/{id}`
 - `GET /api/v1/health/widget`
 
-The following resources are reserved for later releases and must not be implemented against TradingView widget data: candles, analysis, news, AI, and raw provider feeds.
+The following resources are reserved for later releases and must not be implemented against TradingView widget data: candles, live analysis, news, and raw provider feeds. Phase 1 educational AI must use approved non-market content and typed bounded inputs only.
 
 Every market response includes provider/source, exchange, timezone, delay status, `asOf`, freshness, and schema version. Every AI response includes model version, input timestamps, sources, and safety status.
 

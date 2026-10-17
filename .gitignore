@@ -1,0 +1,89 @@
+# Dependencies and package-manager output
+node_modules/
+.pnpm-store/
+.npm/
+.yarn/
+*.tgz
+
+# Environment files and secrets
+.env*
+!.env.example
+!.env.template
+*.local
+*.secret
+*secrets*
+*credentials*
+
+# Private keys, certificates, and provider credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+service-account*.json
+google-credentials*.json
+aws-credentials*
+
+# Build output and framework caches
+.next/
+out/
+dist/
+build/
+.turbo/
+.cache/
+.parcel-cache/
+.eslintcache
+*.tsbuildinfo
+
+# Tests, coverage, and local reports
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+*.snap.new
+
+# Logs and runtime files
+*.log
+logs/
+*.pid
+*.pid.lock
+*.seed
+
+# Local databases, exports, and data dumps
+*.db
+*.sqlite
+*.sqlite3
+*.dump
+*.sql.gz
+data/local/
+data/private/
+tmp/
+temp/
+
+# Deployment and infrastructure local state
+.vercel/
+.serverless/
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# Operating-system files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editors and local tooling
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Keep the repository's safe examples visible
+!.env.example
+!.env.template

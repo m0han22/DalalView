@@ -12,7 +12,7 @@ The product is inspired by TradingView’s charting quality and workflow, but is
 
 ### Fast public MVP boundary
 
-The first public release is India-first by audience, not Indian-exchange-first by data. It starts with supported international instruments, beginning with one documented market region. TradingView widgets provide display-only charts. DalalVue-owned signals, AI, normalized news, Indian exchange data, accounts, and crypto are deferred until their separate data-rights, legal, security, and operational reviews are complete.
+The first public release is India-first by audience, not Indian-exchange-first by data. It starts with 50–100 approved instruments in total: US equities, ETFs, selected indices, and a separately reviewed set of crypto instruments. TradingView widgets provide display-only charts. A small educational AI experience is included, but it cannot use TradingView data or provide signals, predictions, or personalized advice. Normalized news, Indian exchange data, accounts, and alerts are deferred until their separate data-rights, legal, security, and operational reviews are complete.
 
 DalalVue provides market research and education. It does not execute trades, hold customer funds, or promise returns. Initial AI output is general, evidence-based market interpretation rather than personalized financial advice.
 
@@ -37,7 +37,7 @@ DalalVue provides market research and education. It does not execute trades, hol
 - Republishing full copyrighted news articles.
 - Indian exchange-data ingestion in the fast public MVP.
 - Public stock-specific signals or recommendations in the fast public MVP.
-- AI analysis and anonymous AI prompts in the fast public MVP.
+- Live market-data AI analysis, chart-data analysis, and unrestricted anonymous AI prompts in the fast public MVP.
 - News ingestion and normalization in the fast public MVP.
 - Launching every exchange segment and language at once.
 
@@ -74,7 +74,7 @@ Each public instrument page should include:
 - Approved company information and educational context.
 - Clear chart-source, delay, and general-information notices.
 
-Signals, news context, and AI analysis are later-release capabilities and are not part of the fast public MVP.
+Signals and news context are later-release capabilities and are not part of the fast public MVP. The fast public MVP may include constrained educational AI that uses only approved DalalVue content and instrument metadata, never TradingView chart data.
 
 ### 4.3 Chart design
 
@@ -244,7 +244,7 @@ For the product team only. Use fixture data or a permitted sandbox. Validate cha
 
 #### `v0.2` — Fast public MVP
 
-Public chart-discovery and education release for Indian users. Include supported international instruments, official TradingView widgets with attribution, search, instrument metadata, notices, education content, responsive accessibility, monitoring, correction/support contact, and provider-outage handling. Do not include DalalVue signals, AI, normalized news, accounts, watchlists, alerts, or raw market-data ingestion.
+Public chart-discovery and education release for Indian users. Include approved US and selected crypto instruments, official TradingView widgets with attribution, search, instrument metadata, notices, education content, constrained educational AI, browser-local watchlists, responsive accessibility, monitoring, correction/support contact, and provider-outage handling. Do not include DalalVue signals, live/chart-data AI analysis, normalized news, accounts, alerts, or raw market-data ingestion.
 
 #### `v0.5` — Closed beta
 

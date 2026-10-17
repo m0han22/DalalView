@@ -5,6 +5,7 @@ The umbrella product specification defines the product direction. The documents 
 ## Release
 
 - [v1.0 MVP scope](releases/v1.0-mvp-scope.md)
+- [Phase 1 decision record](phase-1-decisions.md)
 
 ## Domains
 

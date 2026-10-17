@@ -4,7 +4,7 @@
 
 Keep public content within the approved general-information and education boundary until legal counsel confirms any broader classification.
 
-For the fast public MVP, public signals, AI responses, news summaries, personalized advice, and trading instructions are disabled. The launch surface is limited to educational content, instrument metadata, and display-only TradingView widgets with source, attribution, delay, privacy, and non-advice notices.
+For the fast public MVP, public signals, live market-data AI responses, news summaries, personalized advice, and trading instructions are disabled. A constrained educational AI experience may explain approved content and chart terminology. The launch surface is limited to educational content, instrument metadata, browser-local watchlists, and display-only TradingView widgets with source, attribution, delay, privacy, and non-advice notices.
 
 ## Requirements
 

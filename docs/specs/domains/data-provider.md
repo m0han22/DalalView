@@ -8,7 +8,7 @@ Obtain Indian market data legally and affordably while keeping DalalVue independ
 
 Use the official TradingView Advanced Chart widget for supported international stocks, ETFs, and indices that TradingView lists as available for widgets. Start with one documented market region, such as US equities. DalalVue will embed the widget and will not download, store, proxy, scrape, calculate from, or process its market data.
 
-Raw NSE/BSE ingestion, raw international-data ingestion, real-time streaming, depth, options analytics, crypto data, and broad derivatives coverage are future decisions requiring separate licensing.
+Raw NSE/BSE ingestion, raw international-data ingestion, real-time streaming, depth, options analytics, and broad derivatives coverage are future decisions requiring separate licensing. Crypto is limited to selected official-widget instruments in Phase 1 and does not create a DalalVue-owned crypto data service.
 
 ## Provider requirements
 

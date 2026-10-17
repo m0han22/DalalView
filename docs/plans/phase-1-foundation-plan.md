@@ -49,25 +49,26 @@ Do not create a public release branch until data rights, legal wording, and oper
 Update the relevant specifications before implementation:
 
 - Confirm the first international market region and exact widget symbol catalog.
-- Confirm that the fast public MVP uses TradingView only for display and has no DalalVue-owned signals.
-- Confirm that accounts, watchlists, signals, AI, news, and crypto remain deferred from the fast public MVP.
+- Confirm that the fast public MVP uses TradingView only for display and that AI is limited to approved educational content with no chart-data input.
+- Confirm that accounts, alerts, signals, and news remain deferred; browser-local watchlists and selected crypto instruments are included.
 - Confirm English and Hindi translation ownership and review.
 - Record legal/compliance review owners and approved notice wording.
 
-**Deliverable:** Decision record linked from the specification index.
+**Deliverable:** [Phase 1 decision record](../specs/phase-1-decisions.md) linked from the specification index.
 
 ### Step 1 — Establish the application scaffold
 
 Create the initial TypeScript application structure:
 
-- Web application.
+- Next.js web application.
+- Hono backend API service.
 - Shared domain and validation package.
 - Test configuration.
 - Linting, formatting, and type checking.
 - Environment configuration with safe example values only.
 - CI checks for type errors, tests, dependency issues, and secret scanning.
 
-**Deliverable:** Empty application starts locally and passes CI checks.
+**Deliverable:** Next.js and Hono start locally as separate services and pass CI checks.
 
 ### Step 2 — Define typed contracts
 
@@ -79,6 +80,8 @@ Implement schemas for:
 - Widget availability, source, attribution, market, delay, and provider-health states.
 - Typed API errors and correlation IDs.
 
+AI content contracts must not accept TradingView widget data. Watchlists must be local-browser state and must not require an account API.
+
 Use fixture-backed endpoints or server-side loaders. Do not expose provider credentials or unrestricted query parameters.
 
 **Deliverable:** Contract tests validate all fixture responses.
@@ -89,6 +92,7 @@ Implement:
 
 - Home page.
 - Search over the fixture instrument catalog.
+- Search over the allowlisted 50–100 instrument catalog.
 - Instrument route with stable URL structure.
 - Exchange, symbol, instrument type, currency, timezone, source, and data-status display.
 - Unsupported-instrument state.
@@ -121,7 +125,7 @@ Add separate education and notice components:
 - TradingView data-separation notice.
 - Beginner chart terminology content.
 
-Do not add public signals, AI generation, news ingestion, or raw data ingestion in this phase.
+Add only the constrained educational AI experience. Do not add public signals, live chart analysis, news ingestion, or raw market-data ingestion in this phase.
 
 **Deliverable:** The public page is clearly educational and cannot be mistaken for a trading instruction.
 
@@ -150,6 +154,8 @@ Verify:
 - Timestamp, source, delay, timeframe, evidence, uncertainty, and methodology are visible.
 - Stale, missing, unsupported, and outage states are explicit.
 - No public signal, personalized buy/sell/hold instruction, or guaranteed prediction appears.
+- AI cannot use TradingView data and only answers approved educational questions.
+- Watchlists remain browser-local and do not expose private account data.
 - Desktop and mobile layouts work.
 - Tests, type checks, dependency checks, and secret scanning pass.
 
@@ -174,8 +180,8 @@ Verify:
 - Real-time or raw Indian/international market-data ingestion.
 - Extracting or calculating from TradingView data.
 - News scraping or automated article summarization.
-- AI chat or model-provider integration.
-- User accounts, watchlists, alerts, or portfolios.
+- Unrestricted AI chat or live market-data AI analysis.
+- User accounts, synced watchlists, alerts, or portfolios.
 - Broker connectivity or order execution.
 - Personalized investment advice.
 - Public SEO archive generation at scale.

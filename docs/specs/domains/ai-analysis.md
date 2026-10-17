@@ -4,7 +4,7 @@
 
 Explain permitted DalalVue company, news, policy, and other approved inputs in English and Hindi while keeping analysis general, evidence-based, and auditable. TradingView widget prices and chart state are excluded from all AI inputs in future releases.
 
-AI analysis is disabled in the fast public MVP. It requires a later release, permitted inputs, quotas, prompt-injection testing, output validation, and legal/compliance review.
+The fast public MVP may include only constrained educational AI. It requires permitted approved-content inputs, quotas, prompt-injection testing, output validation, and legal/compliance review. It must not perform live market analysis or consume TradingView widget data.
 
 ## Output contract
 
