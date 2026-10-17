@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DalalVue Phase 1 Tracker</title>
+  <style>
+    :root {
+      --ink: #14213d;
+      --muted: #64748b;
+      --line: #dbe4ef;
+      --paper: #f7f9fc;
+      --card: #ffffff;
+      --blue: #2563eb;
+      --blue-soft: #eaf1ff;
+      --green: #15803d;
+      --green-soft: #eaf8ef;
+      --amber: #a16207;
+      --amber-soft: #fff7df;
+      --shadow: 0 12px 30px rgba(20, 33, 61, .07);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .shell { max-width: 1120px; margin: 0 auto; padding: 32px 20px 64px; }
+    header { margin-bottom: 24px; }
+    h1, h2, h3 { line-height: 1.2; margin: 0; }
+    h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -.04em; }
+    h2 { font-size: 1.35rem; }
+    h3 { font-size: 1rem; }
+    p { margin: 8px 0; }
+    .eyebrow { color: var(--blue); font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .lede { color: var(--muted); max-width: 780px; font-size: 1.08rem; }
+
+    .summary {
+      align-items: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1fr auto;
+      margin: 24px 0;
+      padding: 20px;
+    }
+    .progress-wrap { min-width: 180px; }
+    .progress-label { color: var(--muted); font-size: .9rem; margin-bottom: 8px; }
+    progress { height: 12px; width: 100%; accent-color: var(--blue); }
+    .percent { color: var(--blue); font-size: 1.7rem; font-weight: 800; }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+    .pill { border-radius: 999px; display: inline-block; font-size: .78rem; font-weight: 700; padding: 4px 10px; }
+    .done { background: var(--green-soft); color: var(--green); }
+    .active { background: var(--blue-soft); color: var(--blue); }
+    .later { background: var(--amber-soft); color: var(--amber); }
+
+    .phase {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      margin: 16px 0;
+      overflow: hidden;
+    }
+    .phase-head { align-items: start; display: flex; gap: 16px; justify-content: space-between; padding: 22px 22px 16px; }
+    .phase-number { color: var(--blue); font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .phase-summary { color: var(--muted); margin-top: 5px; }
+    .phase-status { flex: 0 0 auto; }
+    .phase-body { border-top: 1px solid var(--line); padding: 18px 22px 22px; }
+    .step { border-bottom: 1px solid #edf1f6; display: grid; gap: 12px; grid-template-columns: auto 1fr; padding: 14px 0; }
+    .step:last-child { border-bottom: 0; padding-bottom: 0; }
+    input[type="checkbox"] { accent-color: var(--blue); height: 19px; margin-top: 2px; width: 19px; }
+    .step-title { font-weight: 750; }
+    .step-detail { color: var(--muted); font-size: .93rem; margin-top: 4px; }
+    .deliverable { background: #f8fafc; border-left: 3px solid var(--blue); color: var(--ink); font-size: .9rem; margin-top: 8px; padding: 8px 10px; }
+    .phase.complete { border-color: #9bd2ad; }
+    .phase.complete .phase-status { color: var(--green); }
+
+    .scope {
+      background: var(--ink);
+      border-radius: 18px;
+      color: white;
+      margin-top: 24px;
+      padding: 22px;
+    }
+    .scope p { color: #d6e0f0; }
+    .scope-grid { display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr); margin-top: 16px; }
+    .scope-box { border: 1px solid rgba(255,255,255,.18); border-radius: 12px; padding: 14px; }
+    .scope-box strong { display: block; margin-bottom: 5px; }
+    ul { margin: 8px 0 0; padding-left: 20px; }
+    .controls { display: flex; gap: 10px; justify-content: flex-end; margin: 18px 0; }
+    button { background: white; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); cursor: pointer; font: inherit; padding: 8px 12px; }
+    button:hover { border-color: var(--blue); color: var(--blue); }
+    footer { color: var(--muted); font-size: .9rem; margin-top: 24px; }
+    @media (max-width: 680px) {
+      .summary, .scope-grid { grid-template-columns: 1fr; }
+      .phase-head { display: block; }
+      .phase-status { margin-top: 10px; }
+      .controls { justify-content: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="eyebrow">DalalVue · feat/phase-1-foundation</div>
+      <h1>Phase 1 implementation tracker</h1>
+      <p class="lede">A simple, reviewable plan for the fast public MVP: approved international instruments, display-only TradingView charts, educational content, constrained educational AI, and browser-local watchlists.</p>
+    </header>
+
+    <section class="summary" aria-label="Overall progress">
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="completed">0</span> of <span id="total">0</span> steps completed</div>
+        <progress id="progress" value="0" max="100" aria-label="Overall completion"></progress>
+      </div>
+      <div class="percent" id="percent">0%</div>
+    </section>
+
+    <div class="legend" aria-label="Status legend">
+      <span class="pill done">Completed</span>
+      <span class="pill active">Current / next</span>
+      <span class="pill later">Later release or excluded</span>
+    </div>
+
+    <div class="controls">
+      <button type="button" id="reset">Reset checklist</button>
+    </div>
+
+    <section class="phase complete" data-phase="0">
+      <div class="phase-head">
+        <div><div class="phase-number">Phase 0 · Completed</div><h2>Product and compliance decisions</h2><p class="phase-summary">The scope is agreed before coding begins.</p></div>
+        <div class="phase-status">Complete</div>
+      </div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox" checked disabled><span><span class="step-title">Record the approved market scope</span><div class="step-detail">US equities, ETFs, selected indices, and selected crypto instruments.</div></span></label>
+        <label class="step"><input type="checkbox" checked disabled><span><span class="step-title">Record the product boundaries</span><div class="step-detail">50–100 approved instruments total; TradingView is display-only; no Indian exchange data, brokers, alerts, or news.</div></span></label>
+        <label class="step"><input type="checkbox" checked disabled><span><span class="step-title">Record AI, language, and watchlist decisions</span><div class="step-detail">Constrained educational AI, English plus reviewed Hindi, and browser-local watchlists without accounts.</div></span></label>
+        <div class="deliverable">Deliverable: <a href="specs/phase-1-decisions.md">Phase 1 decision record</a></div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="1">
+      <div class="phase-head"><div><div class="phase-number">Phase 1 · Next</div><h2>Architecture and application scaffold</h2><p class="phase-summary">Build the technical skeleton without adding market features yet.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox" checked><span><span class="step-title">Choose and document the web and API stack</span><div class="step-detail">TypeScript with Next.js for the web application and Hono for a separate backend API service.</div></span></label>
+        <label class="step"><input type="checkbox" checked><span><span class="step-title">Create the hexagonal architecture</span><div class="step-detail">Separate domain rules, application use cases, UI, TradingView adapter, local-storage adapter, and AI adapter.</div></span></label>
+        <label class="step"><input type="checkbox" checked><span><span class="step-title">Create the repository structure</span><div class="step-detail">Set up web, API, shared contracts, domain, application, adapters, configuration, translations, styles, and tests.</div></span></label>
+        <label class="step"><input type="checkbox" checked><span><span class="step-title">Create the basic shell</span><div class="step-detail">Added the Next.js layout, home-page placeholder, loading state, error state, not-found state, Hono server, and health endpoint.</div></span></label>
+        <label class="step"><input type="checkbox" checked><span><span class="step-title">Add development quality tools</span><div class="step-detail">Configured TypeScript, formatting, linting, Vitest unit testing, environment examples, workspace commands, CI checks, dependency auditing, and secret scanning.</div></span></label>
+        <div class="deliverable">Deliverable: Next.js and Hono start locally as separate services and pass type, lint, format, test, and build checks.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="2">
+      <div class="phase-head"><div><div class="phase-number">Phase 2</div><h2>Typed contracts and approved catalog</h2><p class="phase-summary">Define exactly what data the application is allowed to understand.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Define the instrument schema</span><div class="step-detail">ID, name, symbol, exchange or venue, asset type, currency, timezone, TradingView symbol, and enabled status.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Create the 50–100 instrument allowlist</span><div class="step-detail">Start with high-interest US equities, ETFs, indices, and selected crypto instruments. No arbitrary symbol passthrough.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Define status and provenance schemas</span><div class="step-detail">Source, attribution, timestamp, delay, freshness, widget availability, outage, unsupported, and stale states.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Define typed errors and validation</span><div class="step-detail">Validate fixtures and user input at boundaries. Use safe errors and correlation IDs.</div></span></label>
+        <div class="deliverable">Deliverable: Versioned schemas, validated fixtures, and catalog contract tests.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="3">
+      <div class="phase-head"><div><div class="phase-number">Phase 3</div><h2>UX, UI, and design system</h2><p class="phase-summary">Create a clean, fast, beginner-friendly market experience.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Define the visual direction</span><div class="step-detail">Calm, modern, trustworthy, readable, and less cluttered than typical broker dashboards.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Create reusable UI primitives</span><div class="step-detail">Typography, colors, spacing, buttons, inputs, cards, tables, badges, skeletons, notices, and error states.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Design the landing-page journey</span><div class="step-detail">Hero, search, featured instruments, beginner education, trust section, notices, and clear next actions.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Create mobile and Hindi layouts</span><div class="step-detail">Design for small screens first and allow longer Hindi labels without layout breakage.</div></span></label>
+        <div class="deliverable">Deliverable: Approved landing-page wireframe and reusable design system.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="4">
+      <div class="phase-head"><div><div class="phase-number">Phase 4</div><h2>Landing page and instrument discovery</h2><p class="phase-summary">Let a user quickly find an approved instrument.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Build the landing page</span><div class="step-detail">Explain DalalVue, supported markets, educational purpose, source boundaries, and the main search action.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Build catalog search</span><div class="step-detail">Search by company name, symbol, asset type, and exchange or venue.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Build stable instrument routes</span><div class="step-detail">Create predictable URLs and metadata pages for supported instruments.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Handle unsupported and missing instruments</span><div class="step-detail">Show a useful explanation instead of a blank page or fabricated data.</div></span></label>
+        <div class="deliverable">Deliverable: Home → search → instrument-page flow works using approved fixtures.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="5">
+      <div class="phase-head"><div><div class="phase-number">Phase 5</div><h2>TradingView chart integration</h2><p class="phase-summary">Add the official display-only chart safely and responsively.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Integrate only the official widget</span><div class="step-detail">Use approved embed code and preserve visible TradingView attribution and link.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Map allowlisted symbols</span><div class="step-detail">Map internal instrument IDs to reviewed TradingView symbols; never pass arbitrary user input through.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add loading and failure states</span><div class="step-detail">Support loading, unavailable, unsupported, stale, partial, and provider-outage states.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Test mobile and accessibility behavior</span><div class="step-detail">Prevent horizontal overflow and add labels around the embedded chart.</div></span></label>
+        <div class="deliverable">Deliverable: Supported instrument pages show the official widget without TradingView data entering DalalVue systems.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="6">
+      <div class="phase-head"><div><div class="phase-number">Phase 6</div><h2>Browser-local watchlists</h2><p class="phase-summary">Allow simple personalization without accounts or a backend.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Define local watchlist rules</span><div class="step-detail">Store only approved instrument IDs. No private profile or account data.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Implement add, remove, and duplicate handling</span><div class="step-detail">Use safe browser storage with validation and predictable behavior.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Handle storage failure</span><div class="step-detail">Show a clear message and keep the rest of the page usable if storage is unavailable or corrupted.</div></span></label>
+        <div class="deliverable">Deliverable: Users can maintain a private watchlist on one device without creating an account.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="7">
+      <div class="phase-head"><div><div class="phase-number">Phase 7</div><h2>Constrained educational AI</h2><p class="phase-summary">Add useful learning help without turning it into a trading adviser.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Define permitted questions</span><div class="step-detail">Chart terminology, instrument descriptions, market concepts, and approved DalalVue educational content.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Keep TradingView data outside AI</span><div class="step-detail">No chart prices, candles, indicators, extracted chart state, or inferred chart values as AI input.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add safety controls</span><div class="step-detail">Prompt-injection resistance, input limits, rate limits, output validation, refusal of personalized advice, and safe logs.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add model and limitation notices</span><div class="step-detail">Explain that responses are educational, may be incorrect, and are not investment advice.</div></span></label>
+        <div class="deliverable">Deliverable: Educational AI answers approved questions and safely refuses trading instructions.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="8">
+      <div class="phase-head"><div><div class="phase-number">Phase 8</div><h2>Language, notices, and public content</h2><p class="phase-summary">Make the product understandable and transparent in English and Hindi.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Build the translation structure</span><div class="step-detail">Keep English and Hindi content separate, typed, reviewable, and easy to update.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add point-of-use notices</span><div class="step-detail">Show source, attribution, delay, timestamp, general-information, AI-limitations, and TradingView-separation notices near relevant content.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Publish required support pages</span><div class="step-detail">Privacy, terms, copyright/takedown, corrections, complaints, and support contact.</div></span></label>
+        <div class="deliverable">Deliverable: Reviewed English/Hindi public wording and required legal/support pages.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="9">
+      <div class="phase-head"><div><div class="phase-number">Phase 9</div><h2>Security, accessibility, and performance</h2><p class="phase-summary">Make the first user journey safe, inclusive, and fast.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Configure security headers</span><div class="step-detail">CSP compatible with the official widget, HTTPS readiness, clickjacking protection, MIME protection, referrer policy, and permissions policy.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Validate and protect boundaries</span><div class="step-detail">Validate catalog, query, local storage, AI input, output, and configuration values. Keep secrets out of browser bundles and logs.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Test accessibility</span><div class="step-detail">Keyboard navigation, focus states, screen-reader labels, contrast, reduced motion, and mobile touch behavior.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Apply performance budgets</span><div class="step-detail">Server-render public content, keep JavaScript small, lazy-load the widget, reserve chart space, optimize assets, and test on mobile conditions.</div></span></label>
+        <div class="deliverable">Deliverable: Security, accessibility, and performance checks pass for the first user journey.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="10">
+      <div class="phase-head"><div><div class="phase-number">Phase 10</div><h2>Tests, CI, and operational checks</h2><p class="phase-summary">Make quality repeatable before public exposure.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add unit tests</span><div class="step-detail">Test search, schemas, allowlist rules, watchlists, status states, content boundaries, and AI safety rules.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add integration and browser tests</span><div class="step-detail">Test landing page, search, instrument route, widget states, local watchlist, Hindi switch, and educational AI flow.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Add CI gates</span><div class="step-detail">Run format, lint, type-check, tests, production build, dependency check, secret scan, accessibility check, and performance check.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Document outage and rollback handling</span><div class="step-detail">Record how to respond when the widget is unavailable and how to roll back a bad release.</div></span></label>
+        <div class="deliverable">Deliverable: Pull requests cannot merge when required quality or security checks fail.</div>
+      </div>
+    </section>
+
+    <section class="phase" data-phase="11">
+      <div class="phase-head"><div><div class="phase-number">Phase 11 · Exit gate</div><h2>Phase 1 acceptance and release review</h2><p class="phase-summary">Confirm that the MVP is safe and complete before public exposure.</p></div><div class="phase-status">Not started</div></div>
+      <div class="phase-body">
+        <label class="step"><input type="checkbox"><span><span class="step-title">Run the complete user journey</span><div class="step-detail">Landing → search → instrument page → chart → watchlist → educational AI.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Verify data separation</span><div class="step-detail">Confirm TradingView data is not scraped, stored, exposed through APIs, used for AI, or used for SEO claims.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Complete product, legal, security, and operations reviews</span><div class="step-detail">Record owners, approvals, notices, provider terms, privacy, security findings, monitoring, support, and rollback.</div></span></label>
+        <label class="step"><input type="checkbox"><span><span class="step-title">Create the release record</span><div class="step-detail">Record known limitations, approved catalog, test results, and release decision.</div></span></label>
+        <div class="deliverable">Deliverable: Phase 1 acceptance record and internal/public MVP release decision.</div>
+      </div>
+    </section>
+
+    <section class="scope">
+      <h2>Out of scope for this branch</h2>
+      <p>These are intentionally not part of Phase 1 and require separate licensing, legal, security, and operational review.</p>
+      <div class="scope-grid">
+        <div class="scope-box"><strong>Deferred product features</strong><ul><li>NSE/BSE raw market-data ingestion</li><li>News ingestion and summaries</li><li>Public signals or predictions</li><li>Alerts</li><li>User accounts and synced portfolios</li><li>Broker connections or order execution</li></ul></div>
+        <div class="scope-box"><strong>TradingView boundary</strong><ul><li>No scraping or browser extraction</li><li>No storage or proxy API</li><li>No calculations from widget data</li><li>No TradingView data in AI prompts</li><li>No SEO claims based on extracted chart data</li></ul></div>
+      </div>
+    </section>
+
+    <footer>Checklist progress is saved in this browser only. It does not change repository files or create a release record automatically.</footer>
+  </main>
+
+  <script>
+    (() => {
+      const key = "dalalvue-phase-1-tracker-v1";
+      const boxes = [...document.querySelectorAll(".phase:not([data-phase='0']) input[type=checkbox]")];
+      const stored = JSON.parse(localStorage.getItem(key) || "null");
+      const saved = Array.isArray(stored) ? stored : boxes.map(box => box.checked);
+      boxes.forEach((box, index) => { box.checked = Boolean(saved[index]); });
+
+      function update() {
+        const completed = boxes.filter(box => box.checked).length;
+        const total = boxes.length;
+        const percent = total ? Math.round((completed / total) * 100) : 0;
+        document.getElementById("completed").textContent = completed;
+        document.getElementById("total").textContent = total;
+        document.getElementById("percent").textContent = percent + "%";
+        document.getElementById("progress").value = percent;
+        boxes.forEach((box, index) => { saved[index] = box.checked; });
+        localStorage.setItem(key, JSON.stringify(saved));
+        document.querySelectorAll(".phase:not([data-phase='0'])").forEach(phase => {
+          const phaseBoxes = [...phase.querySelectorAll("input[type=checkbox]")];
+          const phaseDone = phaseBoxes.length && phaseBoxes.every(box => box.checked);
+          phase.classList.toggle("complete", phaseDone);
+          phase.querySelector(".phase-status").textContent = phaseDone ? "Complete" : (phaseBoxes.some(box => box.checked) ? "In progress" : "Not started");
+        });
+      }
+      boxes.forEach(box => box.addEventListener("change", update));
+      document.getElementById("reset").addEventListener("click", () => {
+        boxes.forEach(box => { box.checked = false; });
+        localStorage.removeItem(key);
+        update();
+      });
+      update();
+    })();
+  </script>
+</body>
+</html>
