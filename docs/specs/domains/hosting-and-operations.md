@@ -17,5 +17,5 @@ A small cloud deployment may start with a VM, but production must separate web, 
 
 ## Launch gate
 
-Operations must demonstrate a deployment rollback, database restore, provider outage state, AI quota enforcement, and security-alert path before public launch.
+For the fast public MVP, operations must demonstrate deployment rollback, provider/widget outage state, security-alert handling, support/correction handling, and basic uptime monitoring. Database restore and AI quota enforcement become mandatory when persistent accounts, raw data, or AI services are introduced.
 

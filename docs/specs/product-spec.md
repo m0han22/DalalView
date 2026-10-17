@@ -6,9 +6,13 @@
 
 ## 1. Product summary
 
-DalalVue is a public `.in` web platform for Indian traders, investors, and beginners. It combines professional charting, explainable market signals, normalized financial news, market archives, and learning content in one interface.
+DalalVue is a public `.in` web platform for Indian traders, investors, and beginners. The fast public MVP starts with professional international-market chart display and learning content, then adds licensed DalalVue-owned analytics, news, and AI in later releases.
 
 The product is inspired by TradingView’s charting quality and workflow, but is designed around Indian instruments, Indian market events, Indian context, and beginner comprehension.
+
+### Fast public MVP boundary
+
+The first public release is India-first by audience, not Indian-exchange-first by data. It starts with supported international instruments, beginning with one documented market region. TradingView widgets provide display-only charts. DalalVue-owned signals, AI, normalized news, Indian exchange data, accounts, and crypto are deferred until their separate data-rights, legal, security, and operational reviews are complete.
 
 DalalVue provides market research and education. It does not execute trades, hold customer funds, or promise returns. Initial AI output is general, evidence-based market interpretation rather than personalized financial advice.
 
@@ -18,6 +22,7 @@ DalalVue provides market research and education. It does not execute trades, hol
 
 - Make Indian market information easy to discover and understand.
 - Deliver fast, smooth, reliable charts for NSE and BSE instruments that the data licence permits.
+- Launch quickly for Indian users with international instruments supported by the selected display provider.
 - Explain bullish, bearish, and neutral conditions with visible evidence.
 - Normalize financial and relevant political or policy news into useful market context without reproducing raw articles.
 - Build a trustworthy, searchable archive of market pages and news summaries.
@@ -30,7 +35,13 @@ DalalVue provides market research and education. It does not execute trades, hol
 - Personalized portfolio allocation or suitability advice.
 - Guaranteed price predictions, return claims, or automated trading.
 - Republishing full copyrighted news articles.
+- Indian exchange-data ingestion in the fast public MVP.
+- Public stock-specific signals or recommendations in the fast public MVP.
+- AI analysis and anonymous AI prompts in the fast public MVP.
+- News ingestion and normalization in the fast public MVP.
 - Launching every exchange segment and language at once.
+
+The fast public MVP is a chart-discovery and market-education product. It must not imply that TradingView data is available to DalalVue’s calculation or AI systems.
 
 ## 3. Target users
 
@@ -47,11 +58,10 @@ The first experience should serve beginners without removing advanced chart cont
 
 The home page should provide:
 
-- Nifty, Sensex, Bank Nifty, and selected market breadth summaries where licensed.
-- Search for Indian stocks, indices, sectors, and supported instruments.
+- Selected supported international instruments and market summaries.
+- Search for supported international stocks, ETFs, and indices.
 - Market status in IST, including whether data is live, delayed, or end-of-day.
-- Top market events and clearly sourced news summaries.
-- Beginner entry points explaining charts and signals.
+- Beginner entry points explaining charts and market terminology.
 
 ### 4.2 Instrument page
 
@@ -61,10 +71,10 @@ Each public instrument page should include:
 - Responsive candlestick, line, and area charts.
 - Timeframes appropriate to the licensed data.
 - Volume and selected indicators.
-- Corporate actions and company event timeline.
-- News and policy-event context tagged to the instrument or sector.
-- Bullish, bearish, or neutral analysis with timeframe, confidence expression, evidence, invalidation conditions, and last-updated time.
-- Clear notice that the analysis is informational and not a trading instruction.
+- Approved company information and educational context.
+- Clear chart-source, delay, and general-information notices.
+
+Signals, news context, and AI analysis are later-release capabilities and are not part of the fast public MVP.
 
 ### 4.3 Chart design
 
@@ -129,7 +139,7 @@ Use an exchange, exchange-authorized vendor, or another provider whose contract 
 - attribution and exchange trademarks;
 - audit and termination obligations.
 
-Start with delayed or end-of-day data. Real-time data should be introduced only after a commercial licence and cost model are approved.
+For the fast public MVP, use only the official TradingView widget for chart display. DalalVue must not download, store, proxy, scrape, calculate from, or expose TradingView widget data. Any future DalalVue-owned analytics require a separate provider whose agreement permits public display, storage, derived indicators, AI processing, and publication to users in India.
 
 ### 6.2 News and event data
 
@@ -232,17 +242,17 @@ DalalVue will use staged releases. A release is promoted only when its product, 
 
 For the product team only. Use fixture data or a permitted sandbox. Validate chart interactions, information architecture, data schemas, and early AI explanation concepts. This stage is not suitable for public users.
 
-#### `v0.2` — Functional alpha
+#### `v0.2` — Fast public MVP
 
-Private development release with a controlled ingestion pipeline, permitted data, instrument pages, the first documented signal methodology, and news-normalization experiments. Complete an initial threat model and data-quality review.
+Public chart-discovery and education release for Indian users. Include supported international instruments, official TradingView widgets with attribution, search, instrument metadata, notices, education content, responsive accessibility, monitoring, correction/support contact, and provider-outage handling. Do not include DalalVue signals, AI, normalized news, accounts, watchlists, alerts, or raw market-data ingestion.
 
 #### `v0.5` — Closed beta
 
-Invite a small group of testers. Use licensed delayed or end-of-day data. Include notices, privacy and terms pages, AI quotas, feedback, monitoring, backups, and an incident process. Do not include broker connectivity, order execution, or personalized recommendations.
+Invite a small group of testers for the expanded product. Add a separately licensed data provider, documented deterministic analytics, news permissions, and reviewed signal wording only after separate legal and data-rights approval. Include notices, privacy and terms pages, monitoring, backups, and an incident process. Do not include broker connectivity, order execution, or personalized recommendations.
 
 #### `v1.0` — Public MVP
 
-Open to the public only after legal review, data contracts, security testing, privacy and terms publication, SEO controls, operational monitoring, support procedures, and rollback procedures are complete. The initial public scope is charts, watchlists, normalized news, archives, and explainable general market analysis.
+Open to the public only after legal review, data contracts, security testing, privacy and terms publication, SEO controls, operational monitoring, support procedures, and rollback procedures are complete. The expanded public scope may include licensed market data, watchlists, normalized news, archives, and explainable general market analysis only after separate data, legal, security, and operational gates.
 
 #### Post-`v1.0` releases
 

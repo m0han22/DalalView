@@ -4,21 +4,21 @@
 
 Obtain Indian market data legally and affordably while keeping DalalVue independent of any single provider.
 
-## v1.0 data boundary
+## Fast public MVP data boundary
 
-Use the official TradingView Advanced Chart widget for BSE end-of-day stocks, indices, and futures that TradingView lists as available for widgets. DalalVue will embed the widget and will not download, store, proxy, scrape, or process its market data.
+Use the official TradingView Advanced Chart widget for supported international stocks, ETFs, and indices that TradingView lists as available for widgets. Start with one documented market region, such as US equities. DalalVue will embed the widget and will not download, store, proxy, scrape, calculate from, or process its market data.
 
-Raw NSE/BSE ingestion, real-time streaming, depth, options analytics, and broad derivatives coverage are future decisions requiring separate licensing.
+Raw NSE/BSE ingestion, raw international-data ingestion, real-time streaming, depth, options analytics, crypto data, and broad derivatives coverage are future decisions requiring separate licensing.
 
 ## Provider requirements
 
-For TradingView widgets, use only the official embed code, preserve the TradingView attribution/link, and treat the chart as display-only. TradingView widget data must not be used as an input to DalalVue calculations, AI analysis, storage, APIs, or SEO claims.
+For TradingView widgets, use only the official embed code, preserve the TradingView attribution/link, and treat the chart as display-only. TradingView widget data must not be used as an input to DalalVue calculations, AI analysis, storage, APIs, search snippets, or SEO claims.
 
 For any future raw-data provider, the agreement must explicitly permit public display to users in India, historical storage, caching, chart rendering, derived indicators, AI analysis derived from the data, SEO pages, attribution, and the intended user volume. It must state delay, retention, rate limits, fees, support, audit, and termination terms.
 
 ## Candidate routes
 
-- **v1.0 chart route:** Official TradingView widget with supported BSE EOD symbols.
+- **Fast public MVP chart route:** Official TradingView widget with supported international symbols.
 
 - Direct NSE Data & Analytics: `marketdata@nse.co.in`, `+91 22 2659 8385`.
 - BSE Information Products portal and its trial/plan process.
@@ -29,8 +29,8 @@ NSE states that commercial market-data use and redistribution are governed by su
 
 ## Low-budget plan
 
-1. Use TradingView BSE EOD widgets for the public chart layer.
-2. Build privately with fixtures and provider samples for features TradingView cannot supply.
+1. Use TradingView widgets for the public chart layer.
+2. Build privately with fixtures for features TradingView cannot supply.
 3. Request startup, individual, EOD, delayed, limited-symbol, sandbox, and pilot pricing from raw-data providers for future NSE coverage.
 4. Do not extract TradingView data or show unlicensed current prices publicly.
 

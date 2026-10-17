@@ -7,12 +7,10 @@ Use versioned, typed contracts before implementation. Public APIs must never exp
 ## Initial resources
 
 - `GET /api/v1/instruments`
-- `GET /api/v1/instruments/{id}/candles`
-- `GET /api/v1/instruments/{id}/analysis`
-- `GET /api/v1/news`
-- `GET /api/v1/news/{id}`
-- `POST /api/v1/ai/ask`
-- `GET /api/v1/health/data`
+- `GET /api/v1/instruments/{id}`
+- `GET /api/v1/health/widget`
+
+The following resources are reserved for later releases and must not be implemented against TradingView widget data: candles, analysis, news, AI, and raw provider feeds.
 
 Every market response includes provider/source, exchange, timezone, delay status, `asOf`, freshness, and schema version. Every AI response includes model version, input timestamps, sources, and safety status.
 

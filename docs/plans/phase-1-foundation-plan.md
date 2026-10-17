@@ -1,21 +1,21 @@
 # DalalVue Phase 1 implementation plan
 
 **Status:** Proposed  
-**Release target:** `v0.1` internal prototype  
+**Release target:** `v0.2` fast public MVP
 **Primary branch:** `feat/phase-1-foundation`  
-**Scope:** Compliant public instrument-page vertical slice using fixture data and the official TradingView widget
+**Scope:** Compliant public international instrument-page vertical slice using the official TradingView widget
 
 ## Objective
 
-Prove the first complete DalalVue user journey without introducing unlicensed market-data usage, AI safety risk, or premature production infrastructure.
+Ship the first public DalalVue experience quickly without introducing unlicensed market-data usage, AI safety risk, or premature production infrastructure.
 
 The Phase 1 outcome is a user who can:
 
-1. Find a supported BSE instrument.
+1. Find a supported international instrument.
 2. Open its public instrument page.
-3. View the official TradingView BSE end-of-day widget with attribution.
-4. Read a separate DalalVue analysis fixture with evidence, timeframe, freshness, uncertainty, methodology, and notice.
-5. Understand unavailable, stale, and unsupported states.
+3. View the official TradingView widget with attribution.
+4. Read DalalVue education and source/delay notices.
+5. Understand unavailable and unsupported states.
 
 ## Branch plan
 
@@ -48,11 +48,9 @@ Do not create a public release branch until data rights, legal wording, and oper
 
 Update the relevant specifications before implementation:
 
-- Confirm that Phase 1 uses fixture data only.
-- Confirm the exact BSE instrument fixture catalog.
-- Define the source and permitted inputs for DalalVue-owned analysis.
-- Reconcile the no-account v1.0 scope with the product specification’s signed-in watchlist language.
-- Define the first approved meanings of `bullish`, `bearish`, and `neutral`.
+- Confirm the first international market region and exact widget symbol catalog.
+- Confirm that the fast public MVP uses TradingView only for display and has no DalalVue-owned signals.
+- Confirm that accounts, watchlists, signals, AI, news, and crypto remain deferred from the fast public MVP.
 - Confirm English and Hindi translation ownership and review.
 - Record legal/compliance review owners and approved notice wording.
 
@@ -78,8 +76,7 @@ Implement schemas for:
 - Instrument identity and exchange metadata.
 - Provider/source and attribution metadata.
 - Timezone, `asOf`, freshness, and delay status.
-- Analysis state, strength, timeframe, evidence, uncertainty, invalidation conditions, model version, and notice.
-- Widget availability and provider-health states.
+- Widget availability, source, attribution, market, delay, and provider-health states.
 - Typed API errors and correlation IDs.
 
 Use fixture-backed endpoints or server-side loaders. Do not expose provider credentials or unrestricted query parameters.
@@ -93,17 +90,17 @@ Implement:
 - Home page.
 - Search over the fixture instrument catalog.
 - Instrument route with stable URL structure.
-- Exchange, symbol, instrument type, currency, timezone, and data-status display.
+- Exchange, symbol, instrument type, currency, timezone, source, and data-status display.
 - Unsupported-instrument state.
 
-**Deliverable:** A user can search for and open a supported BSE fixture instrument.
+**Deliverable:** A user can search for and open a supported international instrument.
 
 ### Step 4 — Integrate the official chart widget
 
 Implement the isolated widget presentation component:
 
 - Official TradingView Advanced Chart widget.
-- Correct BSE symbol mapping.
+- Correct international market/symbol mapping.
 - Daily interval default for EOD fixtures.
 - Responsive sizing.
 - Visible TradingView attribution and link.
@@ -112,24 +109,21 @@ Implement the isolated widget presentation component:
 
 Hard boundary: no scraping, proxying, browser extraction, storage, API exposure, AI input, or SEO claim based on TradingView widget data.
 
-**Deliverable:** A supported BSE instrument page renders the official widget without horizontal overflow on mobile.
+**Deliverable:** A supported international instrument page renders the official widget without horizontal overflow on mobile.
 
-### Step 5 — Add independent DalalVue analysis presentation
+### Step 5 — Add education and compliance presentation
 
-Add a separate analysis card that reads only permitted fixture inputs:
+Add separate education and notice components:
 
-- `bullish`, `bearish`, or `neutral` state.
-- Documented timeframe.
-- Supporting evidence.
-- Data timestamp and freshness.
-- Uncertainty statement.
-- Invalidation conditions.
-- Methodology link/version.
-- Informational, non-advice notice.
+- Chart source and attribution.
+- Delay and timestamp explanation.
+- General-information/non-advice notice.
+- TradingView data-separation notice.
+- Beginner chart terminology content.
 
-Do not add AI generation in this phase. Use deterministic, manually authored fixtures to validate the contract and UI.
+Do not add public signals, AI generation, news ingestion, or raw data ingestion in this phase.
 
-**Deliverable:** Analysis is visibly independent from the TradingView widget and cannot be mistaken for a trading instruction.
+**Deliverable:** The public page is clearly educational and cannot be mistaken for a trading instruction.
 
 ### Step 6 — Add accessibility and safety controls
 
@@ -150,16 +144,16 @@ Implement and test:
 Verify:
 
 - Search and instrument page flow works.
-- BSE symbol mapping is correct.
+- International symbol mapping is correct.
 - TradingView attribution remains visible.
 - No widget data enters DalalVue analysis or API responses.
 - Timestamp, source, delay, timeframe, evidence, uncertainty, and methodology are visible.
 - Stale, missing, unsupported, and outage states are explicit.
-- No personalized buy/sell/hold instruction or guaranteed prediction appears.
+- No public signal, personalized buy/sell/hold instruction, or guaranteed prediction appears.
 - Desktop and mobile layouts work.
 - Tests, type checks, dependency checks, and secret scanning pass.
 
-**Deliverable:** Phase 1 review record and `v0.1.0-internal` tag.
+**Deliverable:** Public MVP review record and `v0.2.0` tag.
 
 ## Suggested work order
 
@@ -168,16 +162,16 @@ Verify:
 | 1 | Specification decisions | Decision record and approved wording |
 | 2 | Application scaffold | Runnable typed app and CI |
 | 3 | Shared contracts | Validated domain schemas |
-| 4 | Fixture catalog | Safe local instrument and analysis data |
+| 4 | Widget symbol catalog | Safe supported international instrument list |
 | 5 | Search and instrument route | Public page flow |
 | 6 | TradingView widget | Isolated compliant chart display |
-| 7 | Analysis card | Independent explainable signal UI |
+| 7 | Education and notices | Safe public explanation UI |
 | 8 | Safety/accessibility | Baseline controls and tests |
 | 9 | Acceptance review | Internal prototype release |
 
 ## Explicitly out of scope
 
-- Real-time or raw NSE/BSE ingestion.
+- Real-time or raw Indian/international market-data ingestion.
 - Extracting or calculating from TradingView data.
 - News scraping or automated article summarization.
 - AI chat or model-provider integration.
@@ -191,11 +185,11 @@ Verify:
 
 Phase 1 is complete only when:
 
-- The complete instrument-page journey works from fixture data.
-- The chart and DalalVue analysis are technically isolated.
-- All displayed analysis includes evidence, timeframe, freshness, uncertainty, methodology, and notice.
-- Unsupported and stale conditions are visible.
-- Automated tests cover malformed data, unauthorized access boundaries, and provider/widget failure states.
+- The complete instrument-page journey works with the official widget.
+- TradingView data is technically isolated from DalalVue services.
+- Source, attribution, delay, and notice are visible.
+- Unsupported and outage conditions are visible.
+- Automated tests cover malformed configuration, unauthorized access boundaries, and widget failure states.
 - No secrets or private data are present in code, fixtures, logs, or client output.
 - Product, compliance, and engineering reviewers approve the internal prototype.
 

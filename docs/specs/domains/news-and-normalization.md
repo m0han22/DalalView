@@ -4,6 +4,8 @@
 
 Normalize licensed financial, company, RBI, government, policy, and relevant political news into factual, source-linked market context.
 
+News ingestion and normalization are disabled in the fast public MVP. No public page may summarize, transform, or republish third-party news until rights, provenance, correction, and editorial review are in place.
+
 ## Pipeline
 
 Collect → verify licence → validate → deduplicate → extract entities/events → summarize → classify fact versus interpretation → human/sample review → publish/search index.
