@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "concurrently --names web,api --prefix-colors blue,green \"npm run dev --workspace @dalalvue/web\" \"npm run dev --workspace @dalalvue/api\"",
     "build": "npm run build --workspace @dalalvue/web && npm run build --workspace @dalalvue/api",
-    "typecheck": "npm run typecheck --workspace @dalalvue/web && npm run typecheck --workspace @dalalvue/api",
+    "typecheck": "npm run typecheck --workspace @dalalvue/contracts && npm run typecheck --workspace @dalalvue/web && npm run typecheck --workspace @dalalvue/api",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
